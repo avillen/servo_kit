@@ -108,7 +108,7 @@ defmodule ServoKit.PCA9685 do
          {:ok, state} <- set_pwm_frequency(state, frequency),
          do: {:ok, state}
   rescue
-    e -> {:error, e.message}
+    e -> {:stop, {e, __STACKTRACE__}}
   end
 
   @doc """
@@ -143,7 +143,7 @@ defmodule ServoKit.PCA9685 do
 
     {:ok, new_state}
   rescue
-    e -> {:error, e.message}
+    e -> {:error, e}
   end
 
   @doc """
@@ -172,7 +172,7 @@ defmodule ServoKit.PCA9685 do
 
     {:ok, new_state}
   rescue
-    e -> {:error, e.message}
+    e -> {:error, {e, __STACKTRACE__}}
   end
 
   def set_pwm_duty_cycle(%{duty_cycles: duty_cycles} = state, percent, ch: ch)
@@ -187,7 +187,7 @@ defmodule ServoKit.PCA9685 do
 
     {:ok, new_state}
   rescue
-    e -> {:error, e.message}
+    e -> {:error, {e, __STACKTRACE__}}
   end
 
   @doc """
@@ -199,7 +199,7 @@ defmodule ServoKit.PCA9685 do
     :timer.sleep(10)
     {:ok, state}
   rescue
-    e -> {:error, e.message}
+    e -> {:error, {e, __STACKTRACE__}}
   end
 
   @doc """
@@ -214,7 +214,7 @@ defmodule ServoKit.PCA9685 do
 
     {:ok, new_state}
   rescue
-    e -> {:error, e.message}
+    e -> {:error, {e, __STACKTRACE__}}
   end
 
   @doc """
@@ -228,7 +228,7 @@ defmodule ServoKit.PCA9685 do
 
     {:ok, new_state}
   rescue
-    e -> {:error, e.message}
+    e -> {:error, {e, __STACKTRACE__}}
   end
 
   # See data sheet 7.3.1
